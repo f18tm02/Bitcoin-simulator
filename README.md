@@ -1,1 +1,2 @@
-# Bitcoin-simulator
+# 一个有各种Bug的版本
+建议使用方法（bug最少）只添加company, 否则将产生不可预料的后果。
