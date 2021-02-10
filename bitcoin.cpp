@@ -8,6 +8,7 @@ bitcoin::bitcoin()
     this->total = 0;
     buyBillList = new billpq;
     sellBillList = new billpq;
+    dealTotal = 0;
 }
 void bitcoin::update()
 {

@@ -6,6 +6,7 @@
 namespace Ui {
 class bill;
 }
+class core;
 class investor;
 class bill : public QWidget
 {
@@ -26,6 +27,8 @@ public:
     QListWidgetItem *faItem;
     bool bos;
     investor *person;
+
+    core *tcore;
 
     void setNum(int num);
 //    bill *self;

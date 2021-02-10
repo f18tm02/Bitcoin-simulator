@@ -1,18 +1,20 @@
-//#include "gangster.h"
-//#include "core.h"
-//gangster::gangster() {
-//	investor();
-//	patience = 0;
-//	outbreak = 0;
-//	lastbuy = 0;
-//}
-//void gangster::update() {
+#include "gangster.h"
+#include "core.h"
+gangster::gangster() {
+    investor();
+    patience = 0;
+    outbreak = 0;
+    lastbuy = 0;
+    type = 3;
+    property = rand()%100000 + 100000;
+}
+void gangster::update() {
 //	target = 1;
 //	for (int i = 1; i <= 5; i++) {
-//		lastcount[i] = tcore->bitcoins[i]->dealTotal;
+//		lastcount[i] = tcore->bitcoinList[i]->dealTotal;
 //	}
 //	for (int i = 1; i <= 5; i++) {
-//		if (tcore->bitcoins[i]->dealTotal > tcore->bitcoins[target]->dealTotal) target = i;
+//		if (tcore->bitcoinList[i]->dealTotal > tcore->bitcoinList[target]->dealTotal) target = i;
 //	}
 //	if (tcore->totalDeal >= lastcount * 1.5) {
 //		dealsell(lastbuy, 3, i, tcore->bitcoins[lastbuy]);//收割
@@ -25,4 +27,4 @@
 //	patience++;
 //	dealbuy(target, 3, i, property / tcore->bitcoins[target]);//向人多地方下手
 //	lastbuy = target;
-//}
+}

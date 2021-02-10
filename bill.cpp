@@ -1,6 +1,7 @@
 #include "bill.h"
 #include "ui_bill.h"
 #include "investor.h"
+#include "core.h"
 
 bill::bill(QWidget *parent) :
     QWidget(parent),
@@ -43,8 +44,10 @@ bool bill::billDone(int num)
         }
 
     }
+    tcore->bitcoinList[type]+=num;
     if(num == number)
     {
+
         return true;
     }
     number -= num;

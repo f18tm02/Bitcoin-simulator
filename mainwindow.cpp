@@ -23,7 +23,36 @@ MainWindow::MainWindow(QWidget *parent, core *tc)
     QObject::connect(ui->pushButton_2, SIGNAL(clicked()), this, SLOT(playerBuy()));
     QObject::connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(playerSell()));
 
+    for(int i=1; i<=tcore->chiveNum; i++)
+    {
+        if(tcore->chiveList[i] != NULL)
+        {
+            QListWidgetItem *newItem = new QListWidgetItem;
 
+            this->ui->listWidget_3->addItem(newItem);
+             newItem->setText(QString::number(tcore->chiveList[i]->i) + " " + tcore->investorType[tcore->chiveList[i]->type-1] + "  MONEY: $" + QString::number(tcore->chiveList[i]->property));
+        }
+    }
+    for(int i=1; i<=tcore->mobNum; i++)
+    {
+        if(tcore->mobList[i] != NULL)
+        {
+            QListWidgetItem *newItem = new QListWidgetItem;
+
+            this->ui->listWidget_3->addItem(newItem);
+             newItem->setText(QString::number(tcore->mobList[i]->i) + " " + tcore->investorType[tcore->mobList[i]->type-1] + "  MONEY: $" + QString::number(tcore->mobList[i]->property));
+        }
+    }
+    for(int i=1; i<=tcore->gangsterNum; i++)
+    {
+        if(tcore->gangsterList[i] != NULL)
+        {
+            QListWidgetItem *newItem = new QListWidgetItem;
+
+            this->ui->listWidget_3->addItem(newItem);
+             newItem->setText(QString::number(tcore->gangsterList[i]->i) + " " + tcore->investorType[tcore->gangsterList[i]->type-1] + "  MONEY: $" + QString::number(tcore->gangsterList[i]->property));
+        }
+    }
     for(int i=1; i<=tcore->companyNum; i++)
     {
         if(tcore->companyList[i] != NULL)
@@ -34,6 +63,7 @@ MainWindow::MainWindow(QWidget *parent, core *tc)
              newItem->setText(QString::number(tcore->companyList[i]->i) + " " + tcore->investorType[tcore->companyList[i]->type-1] + "  MONEY: $" + QString::number(tcore->companyList[i]->property));
         }
     }
+
 
 }
 MainWindow::~MainWindow()
@@ -46,6 +76,7 @@ void MainWindow::drawBuyBill(int type, int number, int price, investor *buyer)
     ui->listWidget->addItem(item);
     item->setSizeHint(QSize(50, 50));
     bill *newbill = new bill;
+    newbill->tcore = tcore;
     QWidget *bWidget = new QWidget;
     newbill->setParent(bWidget);
     newbill->setBill(tcore->bitcoinList[type]->coinName, QString::number(number), QString::number(price), type, true, buyer);
@@ -61,7 +92,7 @@ void MainWindow::drawSellBill(int type, int number, int price, investor *seller)
     this->ui->listWidget_2->addItem(item);
     item->setSizeHint(QSize(70, 70));
     bill *newbill = new bill;
-
+    newbill->tcore = tcore;
 
     QWidget *bWidget = new QWidget;
     newbill->setParent(bWidget);
@@ -200,10 +231,36 @@ void MainWindow::displayInvestorList()
 {
     for(int i=1; i<=ui->listWidget_3->count(); i++)
     {
-
-        if(tcore->companyList[i] != NULL)
+        if(i <= tcore->chiveNum)
         {
-            ui->listWidget_3->item(i-1)->setText(QString::number(tcore->companyList[i]->i) + " " + tcore->investorType[tcore->companyList[i]->type-1] + "  MONEY: $" + QString::number(tcore->companyList[i]->property));
+            if(tcore->chiveList[i] != NULL)
+            {
+                ui->listWidget_3->item(i-1)->setText(QString::number(tcore->chiveList[i]->i) + " " + tcore->investorType[tcore->chiveList[i]->type-1] + "  MONEY: $" + QString::number(tcore->chiveList[i]->property));
+            }
+        }
+        else if(i <= tcore->chiveNum + tcore->mobNum)
+        {
+            int s = i - tcore->chiveNum;
+            if(tcore->mobList[s] != NULL)
+            {
+                ui->listWidget_3->item(s-1)->setText(QString::number(tcore->mobList[s]->i) + " " + tcore->investorType[tcore->mobList[s]->type-1] + "  MONEY: $" + QString::number(tcore->mobList[s]->property));
+            }
+        }
+        else if(i <= tcore->chiveNum + tcore->mobNum + tcore->gangsterNum)
+        {
+            int s = i - tcore->chiveNum - tcore->mobNum;
+            if(tcore->gangsterList[s] != NULL)
+            {
+                ui->listWidget_3->item(s-1)->setText(QString::number(tcore->gangsterList[s]->i) + " " + tcore->investorType[tcore->gangsterList[s]->type-1] + "  MONEY: $" + QString::number(tcore->gangsterList[s]->property));
+            }
+        }
+        else if(i <= tcore->total)
+        {
+            int s = i - tcore->chiveNum - tcore->mobNum - tcore->gangsterNum;
+            if(tcore->companyList[s] != NULL)
+            {
+                ui->listWidget_3->item(s-1)->setText(QString::number(tcore->companyList[s]->i) + " " + tcore->investorType[tcore->companyList[s]->type-1] + "  MONEY: $" + QString::number(tcore->companyList[s]->property));
+            }
         }
     }
 }

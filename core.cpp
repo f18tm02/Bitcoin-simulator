@@ -6,6 +6,9 @@
 #include "billpq.h"
 #include "player.h"
 #include "company.h"
+#include "chive.h"
+#include "gangster.h"
+#include "mob.h"
 core::core()
 {
     srand(time(0));
@@ -45,6 +48,27 @@ void core::update()
             companyList[i]->update();
         }
     }
+    for(int i=1; i<=gangsterNum; i++)
+    {
+        if(gangsterList[i] != NULL)
+        {
+            gangsterList[i]->update();
+        }
+    }
+    for(int i=1; i<=chiveNum; i++)
+    {
+        if(chiveList[i] != NULL)
+        {
+            chiveList[i]->update();
+        }
+    }
+    for(int i=1; i<=mobNum; i++)
+    {
+        if(mobList[i] != NULL)
+        {
+            mobList[i]->update();
+        }
+    }
     tmainWindow->displayInvestorList();
 }
 void core::setNum(int ch, int mo, int ga, int co)
@@ -62,6 +86,24 @@ void core::setTradeRange(int l, int r)
 }
 void core::init()
 {
+    for(int i=1; i<=chiveNum; i++)
+    {
+        chiveList[i] = new chive;
+        chiveList[i]->i = i;
+        chiveList[i]->tcore = this;
+    }
+    for(int i=1; i<=mobNum; i++)
+    {
+        mobList[i] = new mob;
+        mobList[i]->i = i;
+        mobList[i]->tcore = this;
+    }
+    for(int i=1; i<=gangsterNum; i++)
+    {
+        gangsterList[i] = new gangster;
+        gangsterList[i]->i = i;
+        gangsterList[i]->tcore = this;
+    }
     for(int i=1; i<=companyNum; i++)
     {
         companyList[i] = new company;

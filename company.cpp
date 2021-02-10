@@ -8,12 +8,12 @@ company::company() {
     investor();
 }
 void company::update() {
-    if (rand() % 10 == 1) {
+    if (rand() % 100 == 1) {
         int num = rand()%10+1, price = tcore->bitcoinList[target]->currentPrice + 100;
 
         tcore->buyMent(target, num, num*price, this, price);
     }
-    else if (rand() % 10 == 1) {
+    else if (rand() % 100 == 1) {
         int num = rand()%10+1, price = tcore->bitcoinList[target]->currentPrice + 100;
         tcore->sellMent(target, num, num*price, this, price);
     }

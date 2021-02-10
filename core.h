@@ -56,6 +56,7 @@ public:
     const bool buy = true, sell = false;
     QString investorType[4] = {"Chive", "Mob", "Gangster", "Company"};
 
+//    int totalDeal;
     void init();
 
 private:
